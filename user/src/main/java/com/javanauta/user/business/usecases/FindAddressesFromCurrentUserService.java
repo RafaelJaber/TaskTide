@@ -8,6 +8,7 @@ import com.javanauta.user.infrastructure.entities.User;
 import com.javanauta.user.infrastructure.repositories.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class FindAddressesFromCurrentUserService {
     private final AddressConverter addressConverter;
     private final JwtUtil jwtUtil;
 
+    @Transactional(readOnly = true)
     public List<AddressResponseDTO> execute() {
         User user = jwtUtil.getCurrentUser();
         List<Address> addresses = this.addressRepository.findAllByUserId(user.getId());
