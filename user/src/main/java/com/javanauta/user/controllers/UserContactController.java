@@ -3,6 +3,7 @@ package com.javanauta.user.controllers;
 import com.javanauta.user.business.dto.request.ContactRequestDTO;
 import com.javanauta.user.business.dto.response.ContactResponseDTO;
 import com.javanauta.user.business.usecases.CreateCurrentUserContactService;
+import com.javanauta.user.business.usecases.DeleteCurrentUserContactService;
 import com.javanauta.user.business.usecases.FindContactsFromCurrentUserService;
 import com.javanauta.user.business.usecases.UpdateContactCurrentUserService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class UserContactController {
     private final FindContactsFromCurrentUserService findContactsFromCurrentUserService;
     private final CreateCurrentUserContactService createCurrentUserContactService;
     private final UpdateContactCurrentUserService updateContactCurrentUserService;
+    private final DeleteCurrentUserContactService deleteCurrentUserContactService;
 
     @GetMapping
     public ResponseEntity<List<ContactResponseDTO>> findAddresses() {
@@ -43,5 +45,11 @@ public class UserContactController {
     ){
         ContactResponseDTO contactResponseDTO =  updateContactCurrentUserService.execute(request, contactId);
         return ResponseEntity.status(HttpStatus.OK).body(contactResponseDTO);
+    }
+
+    @DeleteMapping("/{contactId}")
+    public ResponseEntity<Void> deleteContact(@PathVariable Long contactId) {
+        deleteCurrentUserContactService.execute(contactId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
