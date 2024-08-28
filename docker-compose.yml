@@ -10,13 +10,10 @@ services:
       - "5432:5432"
     volumes:
       - ./.data/postgresql/data:/var/lib/postgresql/data
-#  mongo-docker:
-#    image: mongo:latest
-#    container_name: dev-mongo1-dslearn
-#    environment:
-#      POSTGRES_DB: dslearn
-#      POSTGRES_PASSWORD: 1234567
-#    ports:
-#      - "27017:27017"
-#    volumes:
-#      - ./.data/mongo/data:/data/db
+  mongo-docker:
+    image: mongo:latest
+    container_name: mongo-task-tide
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./.data/mongo/data:/data/db
