@@ -1,46 +1,33 @@
-package com.javanauta.user.business;
+package com.javanauta.user.business.usecases;
 
 import com.javanauta.user.business.converter.UserConverter;
 import com.javanauta.user.business.dto.request.UserRequestDTO;
 import com.javanauta.user.business.dto.response.UserResponseDTO;
 import com.javanauta.user.core.utils.JwtUtil;
 import com.javanauta.user.infrastructure.entities.User;
-import com.javanauta.user.infrastructure.exceptions.ResourceNotFoundException;
 import com.javanauta.user.infrastructure.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
-public class UserService {
+public class UpdateCurrentUserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final UserConverter userConverter;
     private final JwtUtil jwtUtil;
 
-    public UserResponseDTO findUserByEmail(String email) {
-        User user =  userRepository.findByEmail(email).orElseThrow(
-                () -> new ResourceNotFoundException("Email not founded " + email)
-        );
-        return userConverter.toResponse(user);
-    }
-
-    public UserResponseDTO updateCurrentUserData(UserRequestDTO dto, String token) {
-        String email = jwtUtil.extractUserEmailFromToken(token.split(" ")[1]);
-        User userEntity = this.userRepository.findByEmail(email).orElseThrow(
-                () -> new ResourceNotFoundException("Email not founded " + email)
-        );
+    @Transactional
+    public UserResponseDTO execute(UserRequestDTO dto) {
+        User userEntity = jwtUtil.getCurrentUser();
         dto.setPassword(dto.getPassword() != null ? passwordEncoder.encode(dto.getPassword()) : null);
 
         User user = this.userConverter.updateUser(dto, userEntity);
 
         User updated = this.userRepository.save(user);
         return userConverter.toResponse(updated);
-    }
-
-    public void deleteByEmail(String email) {
-        this.userRepository.deleteByEmail(email);
     }
 }

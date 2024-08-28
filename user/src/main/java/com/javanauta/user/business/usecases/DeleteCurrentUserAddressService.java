@@ -8,6 +8,7 @@ import com.javanauta.user.infrastructure.exceptions.ResourceNotFoundException;
 import com.javanauta.user.infrastructure.repositories.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class DeleteCurrentUserAddressService {
     private final AddressRepository addressRepository;
     private final JwtUtil jwtUtil;
 
+    @Transactional
     public void execute(Long addressId) {
         Address address = addressRepository.findById(addressId).orElseThrow(
                 () -> new ResourceNotFoundException("Address with id " + addressId + " not found")
