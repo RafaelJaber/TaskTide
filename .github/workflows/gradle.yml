@@ -35,7 +35,7 @@ jobs:
         run: cd user/ && chmod +x gradlew
 
       - name: Build User with Gradle
-        run: cd user/ && ./gradlew build
+        run: cd user/ && ./gradlew build --scan
 
       - name: Run User tests
         run: cd user/ && ./gradlew test
