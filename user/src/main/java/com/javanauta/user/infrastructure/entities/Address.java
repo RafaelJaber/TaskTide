@@ -36,4 +36,8 @@ public class Address {
 
     @Column(name = "zip_code")
     private String zipCode;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
