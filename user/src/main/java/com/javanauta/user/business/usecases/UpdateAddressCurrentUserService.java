@@ -8,6 +8,7 @@ import com.javanauta.user.infrastructure.exceptions.ResourceNotFoundException;
 import com.javanauta.user.infrastructure.repositories.AddressRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
@@ -16,6 +17,7 @@ public class UpdateAddressCurrentUserService {
     private final AddressRepository addressRepository;
     private final AddressConverter addressConverter;
 
+    @Transactional
     public AddressResponseDTO execute(AddressRequestDTO request, Long addressId) {
         Address addressEntity = this.addressRepository.findById(addressId).orElseThrow(
                 () -> new ResourceNotFoundException("Address with id " + addressId + " not found")

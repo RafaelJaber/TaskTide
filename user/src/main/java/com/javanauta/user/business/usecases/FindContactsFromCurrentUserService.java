@@ -8,6 +8,7 @@ import com.javanauta.user.infrastructure.entities.User;
 import com.javanauta.user.infrastructure.repositories.ContactRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -19,6 +20,7 @@ public class FindContactsFromCurrentUserService {
     private final ContactConverter contactConverter;
     private final JwtUtil jwtUtil;
 
+    @Transactional(readOnly = true)
     public List<ContactResponseDTO> execute() {
         User user = jwtUtil.getCurrentUser();
         List<Contact> addresses = this.contactRepository.findAllByUserId(user.getId());
