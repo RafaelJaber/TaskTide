@@ -10,6 +10,7 @@ import com.javanauta.user.business.dto.response.UserResponseDTO;
 import com.javanauta.user.infrastructure.entities.Address;
 import com.javanauta.user.infrastructure.entities.Contact;
 import com.javanauta.user.infrastructure.entities.User;
+import com.javanauta.user.infrastructure.exceptions.ConflictException;
 import com.javanauta.user.infrastructure.repositories.AddressRepository;
 import com.javanauta.user.infrastructure.repositories.ContactRepository;
 import com.javanauta.user.infrastructure.repositories.UserRepository;
@@ -35,6 +36,7 @@ public class CreateUserService {
 
     @Transactional
     public UserResponseDTO execute(UserRequestDTO dto) {
+        this.existsByEmail(dto.getEmail());
         User user = userConverter.toEntity(dto);
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user = userRepository.save(user);
@@ -66,5 +68,16 @@ public class CreateUserService {
                     return contact;
                 })
                 .toList();
+    }
+
+    private void existsByEmail(String email) {
+        try {
+            boolean exists = userRepository.existsByEmail(email);
+            if (exists) {
+                throw new ConflictException("User with email " + email + " already exists");
+            }
+        } catch (ConflictException e) {
+            throw new ConflictException("User with email " + email + " already exists", e.getCause());
+        }
     }
 }
