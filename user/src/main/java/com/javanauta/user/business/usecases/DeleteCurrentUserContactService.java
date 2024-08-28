@@ -8,6 +8,7 @@ import com.javanauta.user.infrastructure.exceptions.ResourceNotFoundException;
 import com.javanauta.user.infrastructure.repositories.ContactRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Objects;
 
@@ -18,6 +19,7 @@ public class DeleteCurrentUserContactService {
     private final ContactRepository contactRepository;
     private final JwtUtil jwtUtil;
 
+    @Transactional
     public void execute(Long contactId) {
         Contact contact = contactRepository.findById(contactId).orElseThrow(
                 () -> new ResourceNotFoundException("Contact with id " + contactId + " not found")
