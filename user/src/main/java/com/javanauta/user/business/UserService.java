@@ -31,10 +31,10 @@ public class UserService {
             this.existsByEmail(dto.getEmail());
 
             User user = userConverter.toEntity(dto);
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            user.setPassword(passwordEncoder.encode(dto.getPassword()));
 
             User inserted = this.userRepository.save(user);
-            return this.userConverter.toResponse(user);
+            return this.userConverter.toResponse(inserted);
         } catch (ConflictException e) {
             throw new ConflictException(e.getMessage(), e.getCause());
 
