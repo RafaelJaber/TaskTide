@@ -3,6 +3,7 @@ package com.javanauta.user.controllers;
 import com.javanauta.user.business.dto.request.AddressRequestDTO;
 import com.javanauta.user.business.dto.response.AddressResponseDTO;
 import com.javanauta.user.business.usecases.CreateCurrentUserAddressService;
+import com.javanauta.user.business.usecases.DeleteCurrentUserAddressService;
 import com.javanauta.user.business.usecases.FindAddressesFromCurrentUserService;
 import com.javanauta.user.business.usecases.UpdateAddressCurrentUserService;
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,7 @@ public class UserAddressController {
     private final FindAddressesFromCurrentUserService findAddressesFromCurrentUserService;
     private final CreateCurrentUserAddressService createCurrentUserAddressService;
     private final UpdateAddressCurrentUserService updateAddressCurrentUserService;
+    private final DeleteCurrentUserAddressService deleteCurrentUserAddressService;
 
 
     @GetMapping
@@ -44,5 +46,11 @@ public class UserAddressController {
     ){
         AddressResponseDTO addressResponseDTO =  updateAddressCurrentUserService.execute(request, addressId);
         return ResponseEntity.status(HttpStatus.OK).body(addressResponseDTO);
+    }
+
+    @DeleteMapping("/{addressId}")
+    public ResponseEntity<Void> deleteAddress(@PathVariable Long addressId) {
+        deleteCurrentUserAddressService.execute(addressId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
