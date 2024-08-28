@@ -29,4 +29,8 @@ public class Contact {
 
     @Column(name = "is_whatsapp")
     private Boolean isWhatsapp;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 }
