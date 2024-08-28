@@ -1,0 +1,22 @@
+version: "3.7"
+services:
+  pg-docker:
+    image: postgres:latest
+    container_name: postgresql-dslearn-task-tide
+    environment:
+      POSTGRES_DB: task-tide
+      POSTGRES_PASSWORD: 1234567
+    ports:
+      - "5433:5432"
+    volumes:
+      - ./.data/postgresql/data:/var/lib/postgresql/data
+#  mongo-docker:
+#    image: mongo:latest
+#    container_name: dev-mongo1-dslearn
+#    environment:
+#      POSTGRES_DB: dslearn
+#      POSTGRES_PASSWORD: 1234567
+#    ports:
+#      - "27017:27017"
+#    volumes:
+#      - ./.data/mongo/data:/data/db
