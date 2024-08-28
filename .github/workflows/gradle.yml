@@ -26,16 +26,16 @@ jobs:
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
-          path: ~/.gradle/caches
-          key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
+          path: users/.gradle/caches
+          key: ${{ runner.os }}-gradle-${{ hashFiles('users/**/build.gradle*', 'users/**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
 
       - name: Grant execute permission for gradlew
-        run: chmod +x gradlew
+        run: chmod +x users/gradlew
 
       - name: Build with Gradle
-        run: ./user/gradlew build
+        run: users/gradlew build
 
       - name: Run tests
-        run: ./user/gradlew test
+        run: users/gradlew test
