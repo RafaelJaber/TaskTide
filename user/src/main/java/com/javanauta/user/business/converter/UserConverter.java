@@ -47,4 +47,15 @@ public class UserConverter {
                 .contacts(contacts)
                 .build();
     }
+
+    public User updateUser(UserRequestDTO dto, User entity) {
+        return User.builder()
+                .id(entity.getId())
+                .name(dto.getName() != null ? dto.getName() : entity.getName())
+                .password(dto.getPassword() != null ? dto.getPassword() : entity.getPassword())
+                .email(dto.getEmail() != null ? dto.getEmail() : entity.getEmail())
+                .addresses(entity.getAddresses())
+                .contacts(entity.getContacts())
+                .build();
+    }
 }
