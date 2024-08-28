@@ -23,9 +23,6 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      - name: Navigate to user directory
-        run: cd user/
-
       - name: Cache Gradle packages
         uses: actions/cache@v3
         with:
@@ -33,17 +30,12 @@ jobs:
           key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
           restore-keys: |
             ${{ runner.os }}-gradle-
-            
-      - name: teste bagaceira
-        run: pwd
-      - name: loucura 2
-        run: ls
         
       - name: Grant execute permission for gradlew
-        run: chmod +x user/gradlew
+        run: cd user/ && chmod +x gradlew
 
-      - name: Build with Gradle
-        run: ./gradlew build
+      - name: Build User with Gradle
+        run: cd user/ && ./gradlew build
 
-      - name: Run tests
-        run: ./gradlew test
+      - name: Run User tests
+        run: cd user/ && ./gradlew test
