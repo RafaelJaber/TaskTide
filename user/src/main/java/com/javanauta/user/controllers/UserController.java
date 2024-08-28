@@ -26,8 +26,8 @@ public class UserController {
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
-    @GetMapping
-    public ResponseEntity<UserResponseDTO> findUserByEmail(@RequestParam("email") String email) {
+    @GetMapping("/{email}")
+    public ResponseEntity<UserResponseDTO> findUserByEmail(@PathVariable String email) {
         UserResponseDTO user = userService.findUserByEmail(email);
         return ResponseEntity.status(HttpStatus.OK).body(user);
     }
