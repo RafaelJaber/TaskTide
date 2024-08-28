@@ -3,6 +3,7 @@ package com.javanauta.user.controllers.handlers;
 import com.javanauta.user.business.dto.response.errors.CustomErrorResponse;
 import com.javanauta.user.business.dto.response.errors.ValidationErrorResponse;
 import com.javanauta.user.infrastructure.exceptions.ConflictException;
+import com.javanauta.user.infrastructure.exceptions.OperationNotPermittedException;
 import com.javanauta.user.infrastructure.exceptions.ResourceNotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,14 @@ public class ControllerExceptionHandler {
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<CustomErrorResponse> conflictExceptionHandler(ConflictException ex, HttpServletRequest request) {
         HttpStatus status = HttpStatus.BAD_REQUEST;
+        CustomErrorResponse err = getCustomError(status, ex.getMessage(), request);
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(OperationNotPermittedException.class)
+    public ResponseEntity<CustomErrorResponse> operationNotPermittedExceptionHandler(OperationNotPermittedException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
         CustomErrorResponse err = getCustomError(status, ex.getMessage(), request);
         return ResponseEntity.status(status).body(err);
     }
