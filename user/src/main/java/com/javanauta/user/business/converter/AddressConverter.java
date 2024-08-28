@@ -38,4 +38,18 @@ public class AddressConverter {
                 .zipCode(address.getZipCode())
                 .build();
     }
+
+    public Address updateAddress(AddressRequestDTO dto, Address entity) {
+        return Address.builder()
+                .id(entity.getId())
+                .street(dto.getStreet() != null ? dto.getStreet() : entity.getStreet())
+                .number(dto.getNumber() != null ? dto.getNumber() : entity.getNumber())
+                .complement(dto.getComplement() != null ? dto.getComplement() : entity.getComplement())
+                .neighborhood(dto.getNeighborhood() != null ? dto.getNeighborhood() : entity.getNeighborhood())
+                .city(dto.getCity() != null ? dto.getCity() : entity.getCity())
+                .state(dto.getState() != null ? dto.getState() : entity.getState())
+                .zipCode(dto.getZipCode() != null ? dto.getZipCode() : entity.getZipCode())
+                .user(entity.getUser())
+                .build();
+    }
 }

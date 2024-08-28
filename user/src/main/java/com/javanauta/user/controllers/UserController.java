@@ -5,6 +5,7 @@ import com.javanauta.user.business.dto.request.LoginRequestDTO;
 import com.javanauta.user.business.dto.request.UserRequestDTO;
 import com.javanauta.user.business.dto.response.LoginResponseDTO;
 import com.javanauta.user.business.dto.response.UserResponseDTO;
+import com.javanauta.user.business.usecases.CreateUserService;
 import com.javanauta.user.core.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,7 @@ import java.net.URI;
 public class UserController {
 
     private final UserService userService;
+    private final CreateUserService createUserService;
     private final JwtUtil jwtUtil;
     private final AuthenticationManager authenticationManager;
 
@@ -34,10 +36,19 @@ public class UserController {
 
     @PostMapping
     public ResponseEntity<UserResponseDTO> insert(@RequestBody UserRequestDTO request) {
-        UserResponseDTO created = this.userService.save(request);
+        UserResponseDTO created = this.createUserService.execute(request);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{email}")
                 .buildAndExpand(created.getEmail()).toUri();
         return ResponseEntity.created(uri).body(created);
+    }
+
+    @PutMapping("/me")
+    public ResponseEntity<UserResponseDTO> updateCurrentUserData(
+            @RequestBody UserRequestDTO request,
+            @RequestHeader("Authorization") String token
+    ) {
+        UserResponseDTO response = this.userService.updateCurrentUserData(request, token);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
     }
 
     @PostMapping("/login")

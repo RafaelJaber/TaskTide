@@ -32,4 +32,15 @@ public class ContactConverter {
                 .isWhatsapp(contact.getIsWhatsapp())
                 .build();
     }
+
+    public Contact updateContact(ContactRequestDTO dto, Contact entity) {
+        return Contact.builder()
+                .id(entity.getId())
+                .areaCode(dto.getAreaCode() != null ? dto.getAreaCode() : entity.getAreaCode())
+                .phoneNumber(dto.getPhoneNumber() != null ? dto.getPhoneNumber() : entity.getPhoneNumber())
+                .type(dto.getType() != null ? dto.getType() : entity.getType())
+                .isWhatsapp(dto.getIsWhatsapp() != null ? dto.getIsWhatsapp() : entity.getIsWhatsapp())
+                .user(entity.getUser())
+                .build();
+    }
 }
