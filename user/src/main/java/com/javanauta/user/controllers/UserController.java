@@ -1,14 +1,18 @@
 package com.javanauta.user.controllers;
 
 import com.javanauta.user.business.UserService;
+import com.javanauta.user.business.dto.request.LoginRequestDTO;
 import com.javanauta.user.business.dto.request.UserRequestDTO;
+import com.javanauta.user.business.dto.response.LoginResponseDTO;
 import com.javanauta.user.business.dto.response.UserResponseDTO;
+import com.javanauta.user.core.utils.JwtUtil;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -19,6 +23,14 @@ import java.net.URI;
 public class UserController {
 
     private final UserService userService;
+    private final JwtUtil jwtUtil;
+    private final AuthenticationManager authenticationManager;
+
+    @GetMapping("/{email}")
+    public ResponseEntity<UserResponseDTO> findUserByEmail(@PathVariable String email) {
+        UserResponseDTO user = userService.findUserByEmail(email);
+        return ResponseEntity.status(HttpStatus.OK).body(user);
+    }
 
     @PostMapping
     public ResponseEntity<UserResponseDTO> insert(@RequestBody UserRequestDTO request) {
@@ -26,5 +38,20 @@ public class UserController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{email}")
                 .buildAndExpand(created.getEmail()).toUri();
         return ResponseEntity.created(uri).body(created);
+    }
+
+    @PostMapping("/login")
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO dto) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(dto.getEmail(), dto.getPassword())
+        );
+        String token = jwtUtil.generateToken(authentication.getName());
+        return ResponseEntity.ok().body(new LoginResponseDTO(token));
+    }
+
+    @DeleteMapping("/{email}")
+    public ResponseEntity<Void> deleteUser(@PathVariable String email) {
+        this.userService.deleteByEmail(email);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
