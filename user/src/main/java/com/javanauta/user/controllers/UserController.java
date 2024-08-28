@@ -40,6 +40,15 @@ public class UserController {
         return ResponseEntity.created(uri).body(created);
     }
 
+    @PutMapping("/me")
+    public ResponseEntity<UserResponseDTO> updateCurrentUserData(
+            @RequestBody UserRequestDTO request,
+            @RequestHeader("Authorization") String token
+    ) {
+        UserResponseDTO response = this.userService.updateCurrentUserData(request, token);
+        return ResponseEntity.status(HttpStatus.OK).body(response);
+    }
+
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody LoginRequestDTO dto) {
         Authentication authentication = authenticationManager.authenticate(

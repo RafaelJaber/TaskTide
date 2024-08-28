@@ -39,7 +39,7 @@ public class JwtUtil {
                 .getPayload();
     }
 
-    public String extrairEmailToken(String token) {
+    public String extractUserEmailFromToken(String token) {
         return extractClaims(token).getSubject();
     }
 
@@ -48,7 +48,7 @@ public class JwtUtil {
     }
 
     public boolean validateToken(String token, String username) {
-        final String extractedUsername = extrairEmailToken(token);
+        final String extractedUsername = extractUserEmailFromToken(token);
         return (extractedUsername.equals(username) && !isTokenExpired(token));
     }
 }
