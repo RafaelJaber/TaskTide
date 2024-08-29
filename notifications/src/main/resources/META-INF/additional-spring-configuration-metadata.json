@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "task-tide.email-sender.from",
+      "type": "java.lang.String",
+      "description": "Description for task-tide.email-sender.from."
+    },
+    {
+      "name": "task-tide.email-sender.friendly-name",
+      "type": "java.lang.String",
+      "description": "Description for task-tide.email-sender.friendly-name."
+    }
+  ] }
