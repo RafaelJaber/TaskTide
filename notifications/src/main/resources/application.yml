@@ -3,5 +3,13 @@ server:
 spring:
   application:
     name: notifications
+  thymeleaf:
+    enabled: true
   sendgrid:
     api-key: ${SEND-GRID-API-KEY:null}
+  profiles:
+    active: ${CURRENT-PROFILE:test}
+task-tide:
+  email-sender:
+    from: ${EMAIL-SENDER-FROM:test@test.com}
+    friendly-name: ${EMAIL-SENDER-FRIENDLY-NAME:developer}
