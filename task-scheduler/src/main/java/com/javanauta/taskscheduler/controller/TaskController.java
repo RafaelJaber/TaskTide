@@ -3,8 +3,9 @@ package com.javanauta.taskscheduler.controller;
 import com.javanauta.taskscheduler.business.dto.request.TaskRequestDTO;
 import com.javanauta.taskscheduler.business.dto.response.TaskResponseDTO;
 import com.javanauta.taskscheduler.business.usecases.CreateTaskService;
-import com.javanauta.taskscheduler.business.usecases.FindTasksBySchedulingDateService;
+import com.javanauta.taskscheduler.business.usecases.DeleteTaskByIdService;
 import com.javanauta.taskscheduler.business.usecases.FindTasksByCurrentUserService;
+import com.javanauta.taskscheduler.business.usecases.FindTasksBySchedulingDateService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -24,6 +25,7 @@ public class TaskController {
     private final FindTasksBySchedulingDateService findTasksBySchedulingDateService;
     private final FindTasksByCurrentUserService findTasksByCurrentUserService;
     private final CreateTaskService createTaskService;
+    private final DeleteTaskByIdService deleteTaskByIdService;
 
 
     @GetMapping("/events")
@@ -47,5 +49,11 @@ public class TaskController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uri).body(created);
+    }
+
+    @DeleteMapping("/{taskId}")
+    public ResponseEntity<Void> delete(@PathVariable String taskId) {
+        this.deleteTaskByIdService.execute(taskId);
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 }
