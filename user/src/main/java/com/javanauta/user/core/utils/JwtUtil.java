@@ -27,8 +27,6 @@ public class JwtUtil {
     private String base64SecretKey;
 
     private SecretKey getSigningKey() {
-
-        System.out.println(base64SecretKey);
         byte[] keyBytes = Base64.getDecoder().decode(base64SecretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
