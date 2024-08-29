@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 @FeignClient(name = "user", url = "${task-tide.microservices.urls.user-service}")
 public interface UserClient {
 
-    @GetMapping("/{email}")
+    @GetMapping("/users/{email}")
     UserResponseDTO findUserByEmail(@PathVariable String email,
                                     @RequestHeader("Authorization") String token);
 }
