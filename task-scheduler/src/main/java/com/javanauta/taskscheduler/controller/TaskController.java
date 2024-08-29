@@ -1,11 +1,9 @@
 package com.javanauta.taskscheduler.controller;
 
 import com.javanauta.taskscheduler.business.dto.request.TaskRequestDTO;
+import com.javanauta.taskscheduler.business.dto.request.TaskStatusRequestDTO;
 import com.javanauta.taskscheduler.business.dto.response.TaskResponseDTO;
-import com.javanauta.taskscheduler.business.usecases.CreateTaskService;
-import com.javanauta.taskscheduler.business.usecases.DeleteTaskByIdService;
-import com.javanauta.taskscheduler.business.usecases.FindTasksByCurrentUserService;
-import com.javanauta.taskscheduler.business.usecases.FindTasksBySchedulingDateService;
+import com.javanauta.taskscheduler.business.usecases.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
@@ -25,6 +23,8 @@ public class TaskController {
     private final FindTasksBySchedulingDateService findTasksBySchedulingDateService;
     private final FindTasksByCurrentUserService findTasksByCurrentUserService;
     private final CreateTaskService createTaskService;
+    private final UpdateTaskService updateTaskService;
+    private final ChangeTaskStatusService changeTaskStatusService;
     private final DeleteTaskByIdService deleteTaskByIdService;
 
 
@@ -49,6 +49,21 @@ public class TaskController {
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
                 .buildAndExpand(created.getId()).toUri();
         return ResponseEntity.created(uri).body(created);
+    }
+
+    @PutMapping("/{taskId}")
+    public ResponseEntity<TaskResponseDTO> update(@PathVariable String taskId, @RequestBody TaskRequestDTO request) {
+        TaskResponseDTO result = this.updateTaskService.execute(request, taskId);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
+    }
+
+    @PatchMapping("/{taskId}/change-status")
+    public ResponseEntity<TaskResponseDTO> changeStatus(
+            @PathVariable String taskId,
+            @RequestBody TaskStatusRequestDTO request
+    ) {
+        TaskResponseDTO result = this.changeTaskStatusService.execute(request, taskId);
+        return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
     @DeleteMapping("/{taskId}")

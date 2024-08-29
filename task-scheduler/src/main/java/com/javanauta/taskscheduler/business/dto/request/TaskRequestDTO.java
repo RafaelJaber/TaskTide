@@ -15,6 +15,6 @@ public class TaskRequestDTO {
     private String taskName;
     private String description;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-ddTHH:mm:ss")
     private LocalDateTime schedulingDate;
 }
