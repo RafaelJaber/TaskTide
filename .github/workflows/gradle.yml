@@ -57,3 +57,12 @@ jobs:
 
       - name: Run tests in Notifications
         run: cd notifications/ && ./gradlew test
+
+      - name: Grant execute permission for gradlew in Notifications
+        run: cd bff-scheduler/ && chmod +x gradlew
+
+      - name: Build with Gradle in Notifications
+        run: cd bff-scheduler/ && ./gradlew build
+
+      - name: Run tests in Notifications
+        run: cd bff-scheduler/ && ./gradlew test
