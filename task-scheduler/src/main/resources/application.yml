@@ -1,6 +1,11 @@
+server:
+  port: 8090
 spring:
   application:
     name: task-scheduler
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/task-tide
 task-tide:
   security:
     secret-key: ${SECRET-KEY:developer}
