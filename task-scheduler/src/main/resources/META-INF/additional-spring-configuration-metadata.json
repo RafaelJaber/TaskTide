@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "task-tide.microservices.urls.user-service",
+      "type": "java.lang.String",
+      "description": "Description for task-tide.microservices.urls.user-service."
+  }
+] }
