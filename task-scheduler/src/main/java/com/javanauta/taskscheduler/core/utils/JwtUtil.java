@@ -1,11 +1,14 @@
 package com.javanauta.taskscheduler.core.utils;
 
 
+import com.javanauta.taskscheduler.infrastructure.exceptions.UserNotLoggedException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -40,6 +43,14 @@ public class JwtUtil {
 
     public boolean isTokenExpired(String token) {
         return extractClaims(token).getExpiration().before(new Date());
+    }
+
+    public String getCurrentUserEmail() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication == null) {
+            throw new UserNotLoggedException("Please login first");
+        }
+        return authentication.getName();
     }
 
     public boolean validateToken(String token, String username) {
