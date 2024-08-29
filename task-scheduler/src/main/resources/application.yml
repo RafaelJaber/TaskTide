@@ -1,3 +1,9 @@
 spring:
   application:
     name: task-scheduler
+task-tide:
+  security:
+    secret-key: ${SECRET-KEY:developer}
+  microservices:
+    urls:
+      user-service: ${MICROSERVICES-URLS-USER-SERVICE:localhost:8080}
