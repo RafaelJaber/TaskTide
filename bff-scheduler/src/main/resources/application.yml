@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: 9010
 eureka:
   client:
     fetch-registry: true
@@ -8,10 +8,4 @@ eureka:
       defaultZone: ${EUREKA-SERVER:http://localhost:8761/eureka}
 spring:
   application:
-    name: task-scheduler-microservice
-  data:
-    mongodb:
-      uri: mongodb://localhost:27017/task-tide
-task-tide:
-  security:
-    secret-key: ${SECRET-KEY:developer}
+    name: bff-scheduler-microservice
