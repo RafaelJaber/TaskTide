@@ -2,6 +2,8 @@ package com.javanauta.taskscheduler.controller.handlers;
 
 import com.javanauta.taskscheduler.business.dto.response.errors.CustomErrorResponse;
 import com.javanauta.taskscheduler.business.dto.response.errors.ValidationErrorResponse;
+import com.javanauta.taskscheduler.infrastructure.exceptions.OperationNotPermittedException;
+import com.javanauta.taskscheduler.infrastructure.exceptions.ResourceNotFoundException;
 import com.javanauta.taskscheduler.infrastructure.exceptions.UserNotLoggedException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
@@ -18,13 +20,21 @@ import java.time.OffsetDateTime;
 public class ControllerExceptionHandler {
 
 
-//    @ResponseStatus(HttpStatus.NOT_FOUND)
-//    @ExceptionHandler(ResourceNotFoundException.class)
-//    public ResponseEntity<CustomErrorResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex, HttpServletRequest request) {
-//        HttpStatus status = HttpStatus.NOT_FOUND;
-//        CustomErrorResponse err = getCustomError(status, ex.getMessage(), request);
-//        return ResponseEntity.status(status).body(err);
-//    }
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(OperationNotPermittedException.class)
+    public ResponseEntity<CustomErrorResponse> operationNotPermittedExceptionHandler(OperationNotPermittedException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.FORBIDDEN;
+        CustomErrorResponse err = getCustomError(status, ex.getMessage(), request);
+        return ResponseEntity.status(status).body(err);
+    }
+
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<CustomErrorResponse> resourceNotFoundExceptionHandler(ResourceNotFoundException ex, HttpServletRequest request) {
+        HttpStatus status = HttpStatus.NOT_FOUND;
+        CustomErrorResponse err = getCustomError(status, ex.getMessage(), request);
+        return ResponseEntity.status(status).body(err);
+    }
 
     @ResponseStatus(HttpStatus.UNAUTHORIZED)
     @ExceptionHandler(UserNotLoggedException.class)
