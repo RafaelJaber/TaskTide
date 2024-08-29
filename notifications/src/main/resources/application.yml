@@ -1,0 +1,7 @@
+server:
+  port: 9000
+spring:
+  application:
+    name: notifications
+  sendgrid:
+    api-key: ${SEND-GRID-API-KEY:null}
