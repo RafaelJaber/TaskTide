@@ -18,7 +18,7 @@ public class UserDetailsServiceImpl {
         UserResponseDTO userResponseDTO = userClient.findUserByEmail(email, token);
         return User
                 .withUsername(userResponseDTO.getEmail())
-                .password(userResponseDTO.getPassword())
+                .password(userResponseDTO.getEmail())
                 .build();
     }
 }
