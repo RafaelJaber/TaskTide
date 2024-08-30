@@ -4,10 +4,13 @@ import com.javanauta.bffscheduler.business.dto.request.LoginRequestDTO;
 import com.javanauta.bffscheduler.business.dto.request.UserRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.LoginResponseDTO;
 import com.javanauta.bffscheduler.business.dto.response.UserResponseDTO;
+import com.javanauta.bffscheduler.core.config.OpenAPIConfig;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -45,9 +48,10 @@ public interface UserControllerOpenAPI {
                     @ApiResponse(responseCode = "401", description = "Invalid or expired JWT token",
                             content = @Content)
             })
+    @SecurityRequirement(name = OpenAPIConfig.SECURITY_SCHEME)
     @PutMapping("/me")
     ResponseEntity<UserResponseDTO> updateCurrentUserData(@RequestBody UserRequestDTO request,
-                                                          @RequestHeader("Authorization") String token);
+                                                          @RequestHeader("Authorization") @Parameter(hidden = true) String token);
 
     @Operation(summary = "Authenticate user", description = "Perform user login and return a JWT token",
             responses = {
@@ -68,7 +72,8 @@ public interface UserControllerOpenAPI {
                     @ApiResponse(responseCode = "404", description = "User not found",
                             content = @Content)
             })
+    @SecurityRequirement(name = OpenAPIConfig.SECURITY_SCHEME)
     @DeleteMapping("/{email}")
     ResponseEntity<Void> deleteUser(@PathVariable String email,
-                                    @RequestHeader("Authorization") String token);
+                                    @RequestHeader(name = "Authorization") @Parameter(hidden = true) String token);
 }

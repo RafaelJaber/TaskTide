@@ -3,10 +3,13 @@ package com.javanauta.bffscheduler.infrastructure.openapi;
 import com.javanauta.bffscheduler.business.dto.request.TaskRequestDTO;
 import com.javanauta.bffscheduler.business.dto.request.TaskStatusRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.TaskResponseDTO;
+import com.javanauta.bffscheduler.core.config.OpenAPIConfig;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Tag(name = "Task API", description = "API for managing tasks in the scheduling system")
+@SecurityRequirement(name = OpenAPIConfig.SECURITY_SCHEME)
 public interface TaskControllerOpenAPI {
 
     @Operation(summary = "Find tasks by scheduling date", description = "Retrieve tasks scheduled within a specific date and time range for the logged-in user",
@@ -32,7 +36,7 @@ public interface TaskControllerOpenAPI {
     ResponseEntity<List<TaskResponseDTO>> findTasksBySchedulingDate(
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
-            @RequestHeader("Authorization") String token
+           @RequestHeader("Authorization") @Parameter(hidden = true) String token
     );
 
     @Operation(summary = "Find tasks of the current user", description = "Retrieve all tasks created by the logged-in user",
@@ -58,7 +62,7 @@ public interface TaskControllerOpenAPI {
             })
     @PostMapping
     ResponseEntity<TaskResponseDTO> insert(@RequestBody TaskRequestDTO request,
-                                           @RequestHeader("Authorization") String token);
+                                          @RequestHeader("Authorization") @Parameter(hidden = true) String token);
 
     @Operation(summary = "Update an existing task", description = "Update the details of an existing task for the logged-in user",
             responses = {
@@ -75,7 +79,7 @@ public interface TaskControllerOpenAPI {
     @PutMapping("/{taskId}")
     ResponseEntity<TaskResponseDTO> update(@PathVariable String taskId,
                                            @RequestBody TaskRequestDTO request,
-                                           @RequestHeader("Authorization") String token);
+                                          @RequestHeader("Authorization") @Parameter(hidden = true) String token);
 
     @Operation(summary = "Change the status of an existing task", description = "Change the status of a task (e.g., to completed) for the logged-in user",
             responses = {
@@ -92,7 +96,7 @@ public interface TaskControllerOpenAPI {
     @PatchMapping("/{taskId}/change-status")
     ResponseEntity<TaskResponseDTO> changeStatus(@PathVariable String taskId,
                                                  @RequestBody TaskStatusRequestDTO request,
-                                                 @RequestHeader("Authorization") String token);
+                                                @RequestHeader("Authorization") @Parameter(hidden = true) String token);
 
     @Operation(summary = "Delete an existing task", description = "Delete an existing task for the logged-in user by task ID",
             responses = {
@@ -104,5 +108,5 @@ public interface TaskControllerOpenAPI {
             })
     @DeleteMapping("/{taskId}")
     ResponseEntity<Void> delete(@PathVariable String taskId,
-                                @RequestHeader("Authorization") String token);
+                               @RequestHeader("Authorization") @Parameter(hidden = true) String token);
 }
