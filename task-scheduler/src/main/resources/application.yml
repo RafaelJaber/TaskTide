@@ -1,5 +1,5 @@
 server:
-  port: 8090
+  port: ${SERVER-PORT:8080}
 eureka:
   client:
     fetch-registry: true
@@ -11,7 +11,7 @@ spring:
     name: task-scheduler-microservice
   data:
     mongodb:
-      uri: mongodb://localhost:27017/task-tide
+      uri: mongodb://${MONGODB-HOST:localhost}:${MONGODB-PORT:27017}/${MONGODB-BASE:task-tide}
 task-tide:
   security:
     secret-key: ${SECRET-KEY:developer}
