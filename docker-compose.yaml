@@ -1,0 +1,84 @@
+version: "3"
+services:
+  pg-docker:
+    image: postgres:latest
+    container_name: postgresql-task-tide
+    environment:
+      POSTGRES_DB: task-tide
+      POSTGRES_PASSWORD: 1234567
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./.data/postgresql/data:/var/lib/postgresql/data
+    networks:
+      - task-tide-network
+
+  mongo-docker:
+    image: mongo:latest
+    container_name: mongo-task-tide
+    ports:
+      - "27017:27017"
+    volumes:
+      - ./.data/mongo/data:/data/db
+    networks:
+      - task-tide-network
+
+  naming-server:
+    image: javanauta-naming-server
+    container_name: javanauta-naming-server
+    ports:
+      - "8761:8761"
+    networks:
+      - task-tide-network
+
+  bff-service-microservice:
+    image: javanauta-bff
+    container_name: javanauta-bff-microservice
+    ports:
+      - "8000:8080"
+    networks:
+      - task-tide-network
+    environment:
+      EUREKA-SERVER: http://naming-server:8761/eureka
+      SYSTEM-USER-EMAIL: ${SYSTEM_USER_EMAIL}
+      SYSTEM-USER-PASSWORD: ${SYSTEM_USER_PASSWORD}
+
+  notifications-microservice:
+    image: javanauta-notifications-microservice
+    container_name: javanauta-notifications-microservice
+    networks:
+      - task-tide-network
+    environment:
+      EUREKA-SERVER: http://naming-server:8761/eureka
+      CURRENT-PROFILE: dev
+      SEND-GRID-API-KEY: ${SEND_GRID_API_KEY}
+      EMAIL-SENDER-FROM: ${EMAIL_SENDER_FROM}
+      EMAIL-SENDER-FRIENDLY-NAME: ${EMAIL_SENDER_FRIENDLY_NAME}
+
+  task-scheduler-microservice:
+    image: javanauta-task-scheduler-microservice
+    container_name: javanauta-task-scheduler-microservice
+    networks:
+      - task-tide-network
+    environment:
+      EUREKA-SERVER: http://naming-server:8761/eureka
+      MONGODB-HOST: mongo-docker
+      SECRET-KEY: ${SECRET_KEY}
+
+  task-user-microservice:
+    image: javanauta-user-microservice
+    container_name: javanauta-user-microservice
+    networks:
+      - task-tide-network
+    environment:
+      EUREKA-SERVER: http://naming-server:8761/eureka
+      PG-HOST: pg-docker
+      PG-USER: postgres
+      PG-PASS: 1234567
+      SECRET-KEY: ${SECRET_KEY}
+
+
+networks:
+  task-tide-network:
+    driver: bridge
+
