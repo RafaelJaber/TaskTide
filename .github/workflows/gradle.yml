@@ -70,8 +70,8 @@ jobs:
       - name: Grant execute permission for gradlew in Naming Service
         run: cd naming-server/ && chmod +x gradlew
 
-      - name: Build with Gradle in BFF Scheduling
+      - name: Build with Gradle in Naming Service
         run: cd naming-server/ && ./gradlew build
 
-      - name: Run tests in BFF Scheduling
+      - name: Run tests in BFF Naming Service
         run: cd naming-server/ && ./gradlew test
