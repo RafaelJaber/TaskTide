@@ -32,7 +32,7 @@ services:
       - task-tide-network
 
   bff-service-microservice:
-    image: javanauta-bff
+    image: javanauta-bff-microservice
     container_name: javanauta-bff-microservice
     ports:
       - "8000:8080"
