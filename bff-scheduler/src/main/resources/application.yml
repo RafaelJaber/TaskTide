@@ -1,0 +1,19 @@
+server:
+  port: 8000
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+      defaultZone: ${EUREKA-SERVER:http://localhost:8761/eureka}
+spring:
+  application:
+    name: bff-scheduler-microservice
+  main:
+    allow-bean-definition-overriding: true
+task-tide:
+  system-user:
+    email: ${SYSTEM-USER-EMAIL:none}
+    password: ${SYSTEM-USER-PASSWORD:none}
+  cron-params:
+    send-notification-tasks: 0 0/5 * * * ?
