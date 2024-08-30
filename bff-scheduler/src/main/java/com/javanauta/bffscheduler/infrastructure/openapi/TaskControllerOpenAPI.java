@@ -48,7 +48,7 @@ public interface TaskControllerOpenAPI {
                             content = @Content)
             })
     @GetMapping("/my")
-    ResponseEntity<List<TaskResponseDTO>> findTasksByCurrentUser(@RequestHeader("Authorization") String token);
+    ResponseEntity<List<TaskResponseDTO>> findTasksByCurrentUser(@RequestHeader("Authorization") @Parameter(hidden = true) String token);
 
     @Operation(summary = "Create a new task", description = "Create a new task for the logged-in user",
             responses = {
