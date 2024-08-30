@@ -1,0 +1,275 @@
+[JAVA_BADGE]: https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white
+[SPRING_BADGE]: https://img.shields.io/badge/spring-%236DB33F.svg?style=for-the-badge&logo=spring&logoColor=white
+[SQLSERVER_BADGE]: https://img.shields.io/badge/Microsoft%20SQL%20Server-CC2927?style=for-the-badge&logo=microsoft%20sql%20server&logoColor=white
+[SWAGGER_BADGE]: https://img.shields.io/badge/-Swagger-%23Clojure?style=for-the-badge&logo=swagger&logoColor=white
+[DOCKER_BADGE]: https://img.shields.io/badge/docker-%230db7ed.svg?style=for-the-badge&logo=docker&logoColor=white
+[MONGO_BADGE]: https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white
+[POSTGRES_BADGE]: https://img.shields.io/badge/postgres-%23316192.svg?style=for-the-badge&logo=postgresql&logoColor=white
+[THYMELEAF_BADGE]: https://img.shields.io/badge/Thymeleaf-%23005C0F.svg?style=for-the-badge&logo=Thymeleaf&logoColor=white
+[INSOMNIA_BADGE]: https://img.shields.io/badge/Insomnia-black?style=for-the-badge&logo=insomnia&logoColor=5849BE
+
+<h1 align="center" style="font-weight: bold;">Task Tide 📋</h1>
+
+
+<div style="text-align: center;">
+
+![java][JAVA_BADGE]
+![spring][SPRING_BADGE]
+![Docker][DOCKER_BADGE]
+![Swagger][SWAGGER_BADGE]
+![MongoDB][MONGO_BADGE]
+![Postgres][POSTGRES_BADGE]
+![Thymeleaf][THYMELEAF_BADGE]
+![Insomnia][INSOMNIA_BADGE]
+
+[//]: # (![MicrosoftSQL Server][SQLSERVER_BADGE])
+
+</div>
+
+
+<p align="center">
+ <a href="#tech">Tecnologias</a> • 
+ <a href="#description">Descrição do Projeto</a> • 
+ <a href="#motivation">Motivação do Projeto</a> • 
+ <a href="#started">Getting Started</a> • 
+ <a href="#routes">Endpoints da API</a> •
+ <a href="#colab">Colaboradores</a> •
+</p>
+
+O **Projeto TaskTide** foi desenvolvido durante o curso [Javanautas](https://javanauta.com.br/) com o propósito de aprimorar minhas habilidades em **Java Spring Boot** e explorar novas tecnologias no ecossistema Java. Ao longo do curso, foram abordados diversos tópicos fundamentais para o desenvolvimento de aplicações modernas e escaláveis, incluindo:
+
+- **Uso de Bancos de Dados:** Implementação de persistência utilizando **MongoDB** e **PostgreSQL**, aproveitando o melhor de ambos os bancos para diferentes cenários de armazenamento de dados.
+
+- **Comunicação entre Microserviços:** Utilização do **OpenFeign** para facilitar a comunicação entre microserviços, promovendo uma arquitetura mais flexível e modular.
+
+Além dos conceitos e práticas apresentados durante o curso, também adicionei aprimoramentos ao projeto, aplicando meus conhecimentos em desenvolvimento com Spring Boot, tais como:
+
+- **Naming Server:** Integração de um servidor de nomes para gerenciar e resolver dinamicamente a localização dos serviços, melhorando a escalabilidade e a resiliência do sistema.
+
+- **Automatizações com Scripts Bash:** Criação de scripts Bash para automatizar tarefas de construção e implantação, otimizando o fluxo de trabalho e reduzindo a possibilidade de erros manuais.
+
+- **Outras Tecnologias:** Implementação de diversas tecnologias avançadas que agregam valor ao projeto, refletindo as melhores práticas em desenvolvimento de software.
+
+Este projeto representa uma síntese do conhecimento adquirido durante o curso e minha experiência prévia em desenvolvimento Java, demonstrando a capacidade de aplicar conceitos teóricos em soluções práticas.
+
+
+## 💻 Tecnologias
+
+Este projeto utiliza as seguintes tecnologias e frameworks:
+
+- **Java 17**: Linguagem de programação utilizada para o desenvolvimento backend.
+- **Spring Boot**: Framework que facilita a criação de aplicações Spring autônomas e de produção.
+- **Spring Security**: Módulo do Spring utilizado para implementar segurança e controle de acesso na aplicação.
+- **Spring Data JPA**: Abstração de persistência de dados baseada no JPA.
+- **Spring Data MongoDB**: Integração com o banco de dados NoSQL MongoDB.
+- **Spring Cloud**: Conjunto de ferramentas para construção de sistemas distribuídos e microserviços.
+    - **Eureka Server**: Serviço de descoberta de microserviços.
+    - **Eureka Client**: Cliente para registro e descoberta de serviços no Eureka.
+    - **OpenFeign**: Cliente HTTP que facilita a comunicação entre microserviços.
+- **JWT (JSON Web Token)**: Implementação de autenticação baseada em tokens.
+- **MapStruct**: Gerador de mapeamentos de objetos Java.
+- **SendGrid**: Serviço de envio de emails.
+- **Thymeleaf**: Motor de templates para construção de páginas web dinâmicas.
+- **PostgreSQL**: Banco de dados relacional utilizado para persistência dos dados.
+- **MongoDB**: Banco de dados NoSQL utilizado para armazenamento de dados.
+- **Swagger (SpringDoc OpenAPI)**: Ferramenta para documentação e teste de APIs.
+- **Docker**: Ferramenta para criação e gerenciamento de containers, utilizada para isolar e executar as aplicações.
+
+
+<h2 id="description">📝 Descrição do Projeto</h2>
+
+O **TaskTide** é um projeto desenvolvido para gerenciar o cadastro de usuários, incluindo seus endereços e telefones, e possibilitar a criação e gestão de tarefas. O sistema é projetado para enviar um e-mail de lembrete ao usuário com uma antecedência de 1 hora para a execução de cada tarefa.
+
+<h2 id="motivation">🌟 Motivação</h2>
+
+A motivação para a criação deste projeto surgiu da necessidade de consolidar e aprimorar habilidades em desenvolvimento com Java e Spring Boot, além de explorar conceitos avançados de arquitetura de microsserviços. O projeto foi estruturado para incorporar boas práticas, como o uso de um NamingService para gerenciamento de serviços e um BFF (Backend For Frontend) para centralização de requisições. O BFF é o único ponto de entrada para os microsserviços internos: UserMicroservices, TaskSchedulerMicroservice e NotificationMicroservice, que operam em uma rede interna protegida dentro de um ambiente Docker.
+
+## Arquitetura do Projeto
+
+### Arquitetura do Projeto
+
+Abaixo está a representação da arquitetura do **TaskTide** e a interação entre os serviços:
+
+### Arquitetura do Projeto
+
+Abaixo está a representação da arquitetura do **TaskTide** e a interação entre os serviços:
+
+```plaintext
+                              +-----------------------+
+                              |    Naming Service     |
+                              |    (Porta 8761)       |
+                              +-----------+-----------+
+                                          |
+                                          |
+                              +-----------v-----------+
+                              |          BFF          |
+                              | (Backend For Frontend)|
+                              |    (Porta 8000)       |
+                              +-----------+-----------+
+                                          |
+           +------------------------------+-------------------------------+
+           |                              |                               |
++----------v-----------+    +-------------v-------------+      +----------v-------------+
+|  UserMicroservices   |    | TaskSchedulerMicroservice |      |NotificationMicroservice|
+|(Cadastro de Usuários)|    |(Gerenciamento de Tarefas) |      |   (Envio de E-mails)   |
++----------+-----------+    +--------------+------------+      +------------------------+
+           |                               |                            
++----------v----------+           +--------v----------+             
+| PostgreSQL DB       |           |      MongoDB      |             
+|(Dados dos Usuários) |           |(Dados das Tarefas)|             
++---------------------+           +-------------------+            
+                       
+```
+
+
+<h2 id="started">🚀 Getting started</h2>
+
+### Pré-requisitos
+
+Antes de começar, certifique-se de ter os seguintes softwares instalados em sua máquina:
+
+- **[Docker](https://www.docker.com/)**: Para criar e gerenciar containers.
+- **[Docker Compose](https://docs.docker.com/compose/)**: Para orquestrar múltiplos containers.
+- **[Java 17](https://www.oracle.com/br/java/technologies/downloads/#java17)**: Linguagem de programação usada no backend do projeto.
+- **[Git](https://git-scm.com/)**: Controle de versão para clonar o repositório do projeto.
+
+### Adicionais
+
+- **Um editor de texto** como Visual Studio Code ou IntelliJ IDEA para explorar e editar o código.
+- **Postman** ou uma ferramenta similar para testar as APIs manualmente, caso deseje fazer isso fora do Swagger.
+
+## Passo a Passo para Executar o Projeto
+
+### 1. Clonar o Repositório
+
+Abra um terminal ou PowerShell e execute o comando para clonar o repositório:
+
+```bash
+git clone <URL_DO_REPOSITORIO>
+```
+
+### 2. Verificar Dependências
+
+Certifique-se de que as seguintes ferramentas estão instaladas em seu sistema:
+
+- **Docker**: [Instruções de instalação do Docker](https://docs.docker.com/get-docker/)
+- **Docker Compose**: [Instruções de instalação do Docker Compose](https://docs.docker.com/compose/install/)
+- **Java**: [Instruções de instalação do Java 17](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html)
+
+Verifique as versões instaladas para garantir que tudo está configurado corretamente:
+
+```bash
+docker --version
+docker-compose --version
+java -version
+```
+
+### 3. Executar o Script de Construção e Implantação
+
+Dependendo do seu sistema operacional, execute o script apropriado:
+
+### Sistemas Unix
+
+1. No terminal, navegue até o diretório do projeto:
+  ```bash
+  cd projeto_javanauta
+  ```
+2. Torne o script `build_and_deploy.sh` executável e execute-o:
+  ```bash
+  chmod +x build_and_deploy.sh
+  ```
+3. Execute o `build_and_deploy.sh`:
+  ```bash
+  ./build_and_deploy.sh 
+  ```
+   
+
+### Windows PowerShell
+
+1. No PowerShell, navegue até o diretório do projeto:
+```powershell
+cd projeto_javanauta
+```
+2. Execute o script `build_and_deploy.ps1`:
+```powershell
+.\build_and_deploy.ps1
+```
+
+## Acessos e Configurações
+
+### Acesso à Interface do Eureka
+
+Para acessar a interface do Eureka, use o seguinte link:
+
+[http://localhost:8761](http://localhost:8761)
+
+Na página, verifique o item **Instances currently registered with Eureka** para garantir que os 4 microserviços estejam registrados.
+
+### Acesso ao Swagger
+
+Para acessar a interface do Swagger, utilize o seguinte link:
+
+[http://localhost:8000/swagger-ui/index.html#/](http://localhost:8000/swagger-ui/index.html#/)
+
+### Download da Coleção do Insomnia
+
+Para fazer o download da coleção do Insomnia, clique no link abaixo:
+
+[Download da Coleção do Insomnia](configurar)
+
+Segue abaixo o conteúdo das variáveis de ambiente para a coleção em JSON:
+
+```json
+{
+	"url": "http://localhost:8000",
+	"task-server": "http://localhost:8000",
+	"notification-server": "http://localhost:9000"
+}
+```
+
+<h2 id="routes">📍 Endpoints da API</h2>
+
+| **Endpoint**                      | **Method** | **Tag**          | **Summary**                           | **Description**                                                             | **Responses**                         |
+|-----------------------------------|------------|------------------|---------------------------------------|-----------------------------------------------------------------------------|---------------------------------------|
+| `/users`                          | `POST`     | User API         | Create a new user                     | Create a new user with the provided data                                    | 201: User created successfully        |
+| `/users/me`                       | `PUT`      | User API         | Update logged-in user's data          | Update the logged-in user's data based on the JWT token                     | 200: User data updated successfully   |
+| `/users/me/contacts/{contactId}`  | `PUT`      | User Contact API | Update an existing contact            | Update an existing contact for the logged-in user                           | 200: Contact updated successfully     |
+| `/users/me/contacts/{contactId}`  | `DELETE`   | User Contact API | Delete a contact                      | Delete a contact of the logged-in user by contact ID                        | 204: Contact deleted successfully     |
+| `/users/me/addresses/{addressId}` | `PUT`      | User Address API | Update an existing address            | Update an existing address for the logged-in user                           | 200: Address updated successfully     |
+| `/users/me/addresses/{addressId}` | `DELETE`   | User Address API | Delete an address                     | Delete an address of the logged-in user by address ID                       | 204: Address deleted successfully     |
+| `/tasks/{taskId}`                 | `PUT`      | Task API         | Update an existing task               | Update the details of an existing task for the logged-in user               | 200: Task updated successfully        |
+| `/tasks/{taskId}`                 | `DELETE`   | Task API         | Delete an existing task               | Delete an existing task for the logged-in user by task ID                   | 204: Task deleted successfully        |
+| `/users/me/contacts`              | `GET`      | User Contact API | Find contacts of the logged-in user   | Retrieve the list of contacts for the logged-in user using a JWT token      | 200: Contacts retrieved successfully  |
+| `/users/me/contacts`              | `POST`     | User Contact API | Create a new contact                  | Create a new contact for the logged-in user                                 | 201: Contact created successfully     |
+| `/users/me/addresses`             | `GET`      | User Address API | Find addresses of the logged-in user  | Retrieve the list of addresses for the logged-in user using a JWT token     | 200: Addresses retrieved successfully |
+| `/users/me/addresses`             | `POST`     | User Address API | Create a new address                  | Create a new address for the logged-in user                                 | 201: Address created successfully     |
+| `/users/login`                    | `POST`     | User API         | Authenticate user                     | Perform user login and return a JWT token                                   | 200: Login successful                 |
+| `/tasks`                          | `POST`     | Task API         | Create a new task                     | Create a new task for the logged-in user                                    | 201: Task created successfully        |
+| `/tasks/{taskId}/change-status`   | `PATCH`    | Task API         | Change the status of an existing task | Change the status of a task (e.g., to completed) for the logged-in user     | 200: Task status changed successfully |
+| `/users/{email}`                  | `GET`      | User API         | Find user by email                    | Retrieve a user by the provided email                                       | 200: User found                       |
+| `/users/{email}`                  | `DELETE`   | User API         | Delete user by email                  | Delete the user with the provided email                                     | 204: User deleted successfully        |
+| `/tasks/my`                       | `GET`      | Task API         | Find tasks of the current user        | Retrieve all tasks created by the logged-in user                            | 200: Tasks retrieved successfully     |
+| `/tasks/events`                   | `GET`      | Task API         | Find tasks by scheduling date         | Retrieve tasks scheduled within a specific date and time range for the user | 200: Tasks retrieved successfully     |
+
+
+<h2 id="colab">🤝 Colaboradores</h2>
+<table>
+  <tr>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/rafaeljaber.png" width="100px;" alt="Rafael Jáber Profile Picture"/><br>
+        <sub>
+          <b>Rafael Jáber</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+      <a href="#">
+        <img src="https://github.com/angelicaweiler.png" width="100px;" alt="Angélica Weiler Profile Picture"/><br>
+        <sub>
+          <b>Angélica Weiler</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
