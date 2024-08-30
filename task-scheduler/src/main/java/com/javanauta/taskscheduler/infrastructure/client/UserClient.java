@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "user", url = "${task-tide.microservices.urls.user-service}")
+@FeignClient(name = "user-microservice")
 public interface UserClient {
 
     @GetMapping("/users/{email}")

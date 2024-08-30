@@ -20,7 +20,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController {
 
-    private final FindTasksBySchedulingDateService findTasksBySchedulingDateService;
+    private final FindPendingTasksBySchedulingDateService findPendingTasksBySchedulingDateService;
     private final FindTasksByCurrentUserService findTasksByCurrentUserService;
     private final CreateTaskService createTaskService;
     private final UpdateTaskService updateTaskService;
@@ -33,7 +33,7 @@ public class TaskController {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime from,
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to
     ) {
-        List<TaskResponseDTO> result = this.findTasksBySchedulingDateService.execute(from, to);
+        List<TaskResponseDTO> result = this.findPendingTasksBySchedulingDateService.execute(from, to);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 
