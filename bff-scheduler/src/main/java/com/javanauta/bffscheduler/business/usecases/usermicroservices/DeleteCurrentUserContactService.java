@@ -1,4 +1,4 @@
-package com.javanauta.bffscheduler.business.usecases;
+package com.javanauta.bffscheduler.business.usecases.usermicroservices;
 
 
 import com.javanauta.bffscheduler.infrastructure.client.UserContactClient;

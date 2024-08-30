@@ -3,10 +3,10 @@ package com.javanauta.bffscheduler.controller;
 
 import com.javanauta.bffscheduler.business.dto.request.ContactRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.ContactResponseDTO;
-import com.javanauta.bffscheduler.business.usecases.CreateCurrentUserContactService;
-import com.javanauta.bffscheduler.business.usecases.DeleteCurrentUserContactService;
-import com.javanauta.bffscheduler.business.usecases.FindContactsFromCurrentUserService;
-import com.javanauta.bffscheduler.business.usecases.UpdateContactCurrentUserService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.CreateCurrentUserContactService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.DeleteCurrentUserContactService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.FindContactsFromCurrentUserService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.UpdateContactCurrentUserService;
 import com.javanauta.bffscheduler.infrastructure.openapi.UserContactControllerOpenAPI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

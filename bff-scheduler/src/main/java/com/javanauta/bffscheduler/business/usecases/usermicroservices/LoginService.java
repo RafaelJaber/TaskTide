@@ -1,4 +1,4 @@
-package com.javanauta.bffscheduler.business.usecases;
+package com.javanauta.bffscheduler.business.usecases.usermicroservices;
 
 import com.javanauta.bffscheduler.business.dto.request.LoginRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.LoginResponseDTO;

@@ -1,6 +1,7 @@
-package com.javanauta.bffscheduler.business.usecases;
+package com.javanauta.bffscheduler.business.usecases.usermicroservices;
 
 
+import com.javanauta.bffscheduler.business.dto.request.UserRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.UserResponseDTO;
 import com.javanauta.bffscheduler.infrastructure.client.UserClient;
 import lombok.RequiredArgsConstructor;
@@ -8,11 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FindUserByEmailService {
+public class CreateUserService {
 
     private final UserClient client;
 
-    public UserResponseDTO execute(String email) {
-        return client.findUserByEmail(email);
+
+    public UserResponseDTO execute(UserRequestDTO dto) {
+        return client.insert(dto);
     }
 }
