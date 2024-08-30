@@ -1,20 +1,20 @@
-package com.javanauta.bffscheduler.business.usecases;
+package com.javanauta.bffscheduler.business.usecases.usermicroservices;
 
 
+import com.javanauta.bffscheduler.business.dto.request.ContactRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.ContactResponseDTO;
 import com.javanauta.bffscheduler.infrastructure.client.UserContactClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
-public class FindContactsFromCurrentUserService {
+public class CreateCurrentUserContactService {
 
     private final UserContactClient client;
 
-    public List<ContactResponseDTO> execute(String token) {
-        return client.findContacts(token);
+
+    public ContactResponseDTO execute(ContactRequestDTO dto, String token) {
+        return client.createContact(dto, token);
     }
 }

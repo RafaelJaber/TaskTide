@@ -3,10 +3,10 @@ package com.javanauta.bffscheduler.controller;
 
 import com.javanauta.bffscheduler.business.dto.request.AddressRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.AddressResponseDTO;
-import com.javanauta.bffscheduler.business.usecases.CreateCurrentUserAddressService;
-import com.javanauta.bffscheduler.business.usecases.DeleteCurrentUserAddressService;
-import com.javanauta.bffscheduler.business.usecases.FindAddressesFromCurrentUserService;
-import com.javanauta.bffscheduler.business.usecases.UpdateAddressCurrentUserService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.CreateCurrentUserAddressService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.DeleteCurrentUserAddressService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.FindAddressesFromCurrentUserService;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.UpdateAddressCurrentUserService;
 import com.javanauta.bffscheduler.infrastructure.openapi.UserAddressControllerOpenAPI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

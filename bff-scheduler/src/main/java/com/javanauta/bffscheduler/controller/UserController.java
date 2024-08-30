@@ -5,7 +5,7 @@ import com.javanauta.bffscheduler.business.dto.request.LoginRequestDTO;
 import com.javanauta.bffscheduler.business.dto.request.UserRequestDTO;
 import com.javanauta.bffscheduler.business.dto.response.LoginResponseDTO;
 import com.javanauta.bffscheduler.business.dto.response.UserResponseDTO;
-import com.javanauta.bffscheduler.business.usecases.*;
+import com.javanauta.bffscheduler.business.usecases.usermicroservices.*;
 import com.javanauta.bffscheduler.infrastructure.openapi.UserControllerOpenAPI;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

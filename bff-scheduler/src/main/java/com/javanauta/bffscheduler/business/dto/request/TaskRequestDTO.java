@@ -1,4 +1,4 @@
-package com.javanauta.taskscheduler.business.dto.request;
+package com.javanauta.bffscheduler.business.dto.request;
 
 import lombok.*;
 

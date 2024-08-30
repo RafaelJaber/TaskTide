@@ -1,4 +1,4 @@
-package com.javanauta.bffscheduler.business.usecases;
+package com.javanauta.bffscheduler.business.usecases.usermicroservices;
 
 
 import com.javanauta.bffscheduler.business.dto.request.UserRequestDTO;
@@ -9,12 +9,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class CreateUserService {
+public class UpdateCurrentUserService {
 
     private final UserClient client;
 
 
-    public UserResponseDTO execute(UserRequestDTO dto) {
-        return client.insert(dto);
+    public UserResponseDTO execute(UserRequestDTO dto, String token) {
+        return client.updateCurrentUserData(dto, token);
     }
 }
