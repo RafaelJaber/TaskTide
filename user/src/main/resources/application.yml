@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER-PORT:8080}
 eureka:
   client:
     fetch-registry: true
@@ -11,9 +11,9 @@ spring:
   application:
     name: user-microservice
   datasource:
-    url: jdbc:postgresql://localhost:5432/task-tide
-    username: postgres
-    password: 1234567
+    url: jdbc:postgresql://${PG-HOST:localhost}:${PG-PORT:5432}/${PG-BASE:task-tide}
+    username: ${PG-USER:postgres}
+    password: ${PG-PASS:1234567}
   jpa:
     show-sql: true
     hibernate:
