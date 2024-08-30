@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class FindTasksBySchedulingDateService {
+public class FindPendingTasksBySchedulingDateService {
 
     private final TaskClient client;
 

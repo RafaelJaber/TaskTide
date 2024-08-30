@@ -11,3 +11,9 @@ spring:
     name: bff-scheduler-microservice
   main:
     allow-bean-definition-overriding: true
+task-tide:
+  system-user:
+    email: ${SYSTEM-USER-EMAIL:none}
+    password: ${SYSTEM-USER-PASSWORD:none}
+  cron-params:
+    send-notification-tasks: 0 0/5 * * * ?

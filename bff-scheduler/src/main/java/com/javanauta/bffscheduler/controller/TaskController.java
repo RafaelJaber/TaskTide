@@ -21,7 +21,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class TaskController implements TaskControllerOpenAPI {
 
-    private final FindTasksBySchedulingDateService findTasksBySchedulingDateService;
+    private final FindPendingTasksBySchedulingDateService findPendingTasksBySchedulingDateService;
     private final FindTasksByCurrentUserService findTasksByCurrentUserService;
     private final CreateTaskService createTaskService;
     private final UpdateTaskService updateTaskService;
@@ -35,7 +35,7 @@ public class TaskController implements TaskControllerOpenAPI {
             @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime to,
             @RequestHeader("Authorization") String token
     ) {
-        List<TaskResponseDTO> result = this.findTasksBySchedulingDateService.execute(from, to, token);
+        List<TaskResponseDTO> result = this.findPendingTasksBySchedulingDateService.execute(from, to, token);
         return ResponseEntity.status(HttpStatus.OK).body(result);
     }
 

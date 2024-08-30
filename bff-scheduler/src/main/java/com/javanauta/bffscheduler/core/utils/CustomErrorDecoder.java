@@ -30,10 +30,11 @@ public class CustomErrorDecoder implements ErrorDecoder {
                         errorResponse.getPath()
                 );
             } catch (Exception ex) {
+                System.out.println(ex.getMessage());
                 return new FeignGeneralException(ex.getMessage(), ex.getCause());
             }
         } else {
-            return new FeignGeneralException(response.reason());
+            return new FeignGeneralException("Status code: " + response.status());
         }
     }
 }
