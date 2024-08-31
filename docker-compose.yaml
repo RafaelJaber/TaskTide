@@ -1,4 +1,3 @@
-version: "3"
 services:
   pg-docker:
     image: postgres:latest
@@ -42,6 +41,8 @@ services:
       EUREKA-SERVER: http://naming-server:8761/eureka
       SYSTEM-USER-EMAIL: ${SYSTEM_USER_EMAIL}
       SYSTEM-USER-PASSWORD: ${SYSTEM_USER_PASSWORD}
+    depends_on:
+      - naming-server
 
   notifications-microservice:
     image: javanauta-notifications-microservice
@@ -54,6 +55,8 @@ services:
       SEND-GRID-API-KEY: ${SEND_GRID_API_KEY}
       EMAIL-SENDER-FROM: ${EMAIL_SENDER_FROM}
       EMAIL-SENDER-FRIENDLY-NAME: ${EMAIL_SENDER_FRIENDLY_NAME}
+    depends_on:
+      - naming-server
 
   task-scheduler-microservice:
     image: javanauta-task-scheduler-microservice
@@ -64,6 +67,9 @@ services:
       EUREKA-SERVER: http://naming-server:8761/eureka
       MONGODB-HOST: mongo-docker
       SECRET-KEY: ${SECRET_KEY}
+    depends_on:
+      - mongo-docker
+      - naming-server
 
   task-user-microservice:
     image: javanauta-user-microservice
@@ -76,6 +82,9 @@ services:
       PG-USER: postgres
       PG-PASS: 1234567
       SECRET-KEY: ${SECRET_KEY}
+    depends_on:
+      - pg-docker
+      - naming-server
 
 
 networks:

@@ -177,7 +177,7 @@ Adicione as seguintes variáveis ao seu arquivo `.env`:
 - **`EMAIL_SENDER_FRIENDLY_NAME`**: Nome amigável que será exibido como remetente dos e-mails.
 - **`EMAIL_SENDER_FROM`**: E-mail do remetente para o envio de mensagens.
 - **`SEND_GRID_API_KEY`**: Chave da API do SendGrid para envio de e-mails.
-- **`SECRET_KEY`**: Chave secreta utilizada para a criptografia e segurança do sistema.
+- **`SECRET_KEY`**: Chave secreta utilizada para a criptografia e segurança do sistema. - Deve ser uma chave grande
 
 ### Exemplo de Variáveis
 
@@ -188,7 +188,7 @@ Aqui está um exemplo de como configurar as variáveis no arquivo `.env`:
 - `EMAIL_SENDER_FRIENDLY_NAME="MyApp Notifications"`
 - `EMAIL_SENDER_FROM="no-reply@myapp.com"`
 - `SEND_GRID_API_KEY="SG.token-gerado-send-grid"`
-- `SECRET_KEY="minha-chave-super-segura"`
+- `SECRET_KEY="c6de5b8e65bfe7d2c90d8b6a5fd64e99cd6f7a0d92e1f8b8c8b7e9f4a3d2c1e0"`
 
 ### Instruções para Gerar o Token `SEND_GRID_API_KEY`
 
@@ -219,7 +219,7 @@ Dependendo do seu sistema operacional, execute o script apropriado:
 
 1. No terminal, navegue até o diretório do projeto:
   ```bash
-  cd projeto_javanauta
+  cd TaskTide
   ```
 2. Torne o script `build_and_deploy.sh` executável e execute-o:
   ```bash
@@ -231,15 +231,26 @@ Dependendo do seu sistema operacional, execute o script apropriado:
   ```
 
 
-### Windows PowerShell
+### Windows PowerShell - Execução de comandos precisa estar habilitada
 
 1. No PowerShell, navegue até o diretório do projeto:
 ```powershell
-cd projeto_javanauta
+cd TaskTide
 ```
 2. Execute o script `build_and_deploy.ps1`:
 ```powershell
 .\build_and_deploy.ps1
+```
+
+### Windows CMD
+
+1. No Prompt de Comando, navegue até o diretório do projeto:
+```cmd
+cd TaskTide
+```
+2. Execute o script `build_and_deploy.bat`:
+```cmd
+build_and_deploy.bat
 ```
 
 ## Acessos e Configurações
