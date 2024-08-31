@@ -63,9 +63,9 @@ Este projeto utiliza as seguintes tecnologias e frameworks:
 - **Spring Data JPA**: Abstração de persistência de dados baseada no JPA.
 - **Spring Data MongoDB**: Integração com o banco de dados NoSQL MongoDB.
 - **Spring Cloud**: Conjunto de ferramentas para construção de sistemas distribuídos e microserviços.
-    - **Eureka Server**: Serviço de descoberta de microserviços.
-    - **Eureka Client**: Cliente para registro e descoberta de serviços no Eureka.
-    - **OpenFeign**: Cliente HTTP que facilita a comunicação entre microserviços.
+  - **Eureka Server**: Serviço de descoberta de microserviços.
+  - **Eureka Client**: Cliente para registro e descoberta de serviços no Eureka.
+  - **OpenFeign**: Cliente HTTP que facilita a comunicação entre microserviços.
 - **JWT (JSON Web Token)**: Implementação de autenticação baseada em tokens.
 - **MapStruct**: Gerador de mapeamentos de objetos Java.
 - **SendGrid**: Serviço de envio de emails.
@@ -145,7 +145,7 @@ Antes de começar, certifique-se de ter os seguintes softwares instalados em sua
 Abra um terminal ou PowerShell e execute o comando para clonar o repositório:
 
 ```bash
-git clone <URL_DO_REPOSITORIO>
+git clone https://github.com/RafaelJaber/TaskTide.git
 ```
 
 ### 2. Verificar Dependências
@@ -164,7 +164,54 @@ docker-compose --version
 java -version
 ```
 
-### 3. Executar o Script de Construção e Implantação
+### 3. Configuração do Arquivo `.env`
+
+Para configurar o ambiente do seu projeto, você precisará criar um arquivo `.env` na raiz do projeto e definir as seguintes variáveis de ambiente. Este arquivo é utilizado para armazenar informações sensíveis e configurações específicas do ambiente.
+
+### Variáveis de Ambiente
+
+Adicione as seguintes variáveis ao seu arquivo `.env`:
+
+- **`SYSTEM_USER_EMAIL`**: E-mail do usuário do sistema, utilizado para autenticação administrativa.
+- **`SYSTEM_USER_PASSWORD`**: Senha do usuário do sistema, utilizado para autenticação administrativa.
+- **`EMAIL_SENDER_FRIENDLY_NAME`**: Nome amigável que será exibido como remetente dos e-mails.
+- **`EMAIL_SENDER_FROM`**: E-mail do remetente para o envio de mensagens.
+- **`SEND_GRID_API_KEY`**: Chave da API do SendGrid para envio de e-mails.
+- **`SECRET_KEY`**: Chave secreta utilizada para a criptografia e segurança do sistema.
+
+### Exemplo de Variáveis
+
+Aqui está um exemplo de como configurar as variáveis no arquivo `.env`:
+
+- `SYSTEM_USER_EMAIL="admin@example.com"`
+- `SYSTEM_USER_PASSWORD="securePassword123"`
+- `EMAIL_SENDER_FRIENDLY_NAME="MyApp Notifications"`
+- `EMAIL_SENDER_FROM="no-reply@myapp.com"`
+- `SEND_GRID_API_KEY="SG.token-gerado-send-grid"`
+- `SECRET_KEY="minha-chave-super-segura"`
+
+### Instruções para Gerar o Token `SEND_GRID_API_KEY`
+
+Para gerar a chave da API do SendGrid, siga os passos abaixo:
+
+1. **Acesse o SendGrid**: Vá para o [site do SendGrid](https://sendgrid.com/) e faça login na sua conta. Se você ainda não tiver uma conta, será necessário criar uma.
+2. **Navegue até a Seção de API Keys**: Após fazer login, acesse o painel do SendGrid e vá para "Settings" (Configurações) e depois "API Keys".
+3. **Crie uma Nova API Key**:
+- Clique no botão "Create API Key" (Criar Chave de API).
+- Dê um nome para sua chave e selecione as permissões necessárias.
+- Clique em "Create & View" (Criar e Visualizar) para gerar a chave.
+4. **Copie a Chave**: Após a criação, você verá a chave gerada. Copie esta chave e cole-a no valor da variável `SEND_GRID_API_KEY` no seu arquivo `.env`.
+
+### Passos para Configuração
+
+1. **Crie o Arquivo `.env`**: Na raiz do seu projeto, crie um arquivo chamado `.env` se ele ainda não existir.
+2. **Adicione as Variáveis**: Copie e cole as variáveis acima no arquivo `.env`.
+3. **Salve o Arquivo**: Salve as alterações no arquivo `.env`.
+
+Essas configurações são essenciais para o funcionamento correto do projeto e garantem que o sistema possa enviar e-mails e manter a segurança adequada.
+
+
+### 4. Executar o Script de Construção e Implantação
 
 Dependendo do seu sistema operacional, execute o script apropriado:
 
@@ -182,7 +229,7 @@ Dependendo do seu sistema operacional, execute o script apropriado:
   ```bash
   ./build_and_deploy.sh 
   ```
-   
+
 
 ### Windows PowerShell
 
@@ -215,7 +262,7 @@ Para acessar a interface do Swagger, utilize o seguinte link:
 
 Para fazer o download da coleção do Insomnia, clique no link abaixo:
 
-[Download da Coleção do Insomnia](configurar)
+[Download da Coleção do Insomnia](https://github.com/RafaelJaber/TaskTide/raw/master/docs/insomnia-collection.json)
 
 Segue abaixo o conteúdo das variáveis de ambiente para a coleção em JSON:
 
@@ -226,6 +273,39 @@ Segue abaixo o conteúdo das variáveis de ambiente para a coleção em JSON:
 	"notification-server": "http://localhost:9000"
 }
 ```
+
+## 🚀 Cadastro do Usuário Padrão
+
+Após iniciar o sistema, é necessário cadastrar o usuário padrão que foi especificado nas variáveis de ambiente. Este usuário padrão será utilizado para as operações administrativas iniciais do sistema.
+
+### Instruções para Cadastro do Usuário Padrão
+
+1. **Inicie o Sistema**: Certifique-se de que o sistema está em funcionamento. Isso pode ser feito executando os scripts de build e deploy conforme descrito anteriormente.
+
+2. **Realize o Cadastro do Usuário**: Utilize um cliente HTTP (como Postman, Insomnia, ou cURL) para fazer uma requisição POST para o endpoint responsável pelo cadastro de usuários.
+
+- **Endpoint**: `POST /users`
+- **URL Completa**: `http://localhost:8000/users` (ou a URL correspondente ao seu BFF)
+- **Método**: POST
+- **Headers**:
+  - `Content-Type: application/json`
+- **Corpo da Requisição**: Envie um JSON com os seguintes dados:
+
+  ```json
+  {
+    "name": "System",
+    "email": "system@system.com",
+    "password": "123456",
+    "addresses": [],
+    "contacts": []
+  }
+  ```
+
+O `email` e a `password` devem corresponder às variáveis `SYSTEM_USER_EMAIL` e `SYSTEM_USER_PASSWORD` especificadas no arquivo `.env`.
+
+3. **Verifique o Cadastro**: Após enviar a requisição, verifique se o usuário foi cadastrado corretamente no sistema. Você pode fazer isso verificando a resposta da API ou acessando a interface administrativa, se disponível.
+
+Seguir esses passos garantirá que o usuário padrão seja registrado e pronto para usar as funcionalidades administrativas do sistema.
 
 <h2 id="routes">📍 Endpoints da API</h2>
 
@@ -252,24 +332,44 @@ Segue abaixo o conteúdo das variáveis de ambiente para a coleção em JSON:
 | `/tasks/events`                   | `GET`      | Task API         | Find tasks by scheduling date         | Retrieve tasks scheduled within a specific date and time range for the user | 200: Tasks retrieved successfully     |
 
 
-<h2 id="colab">🤝 Colaboradores</h2>
-<table>
-  <tr>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/rafaeljaber.png" width="100px;" alt="Rafael Jáber Profile Picture"/><br>
-        <sub>
-          <b>Rafael Jáber</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="#">
-        <img src="https://github.com/angelicaweiler.png" width="100px;" alt="Angélica Weiler Profile Picture"/><br>
-        <sub>
-          <b>Angélica Weiler</b>
-        </sub>
-      </a>
-    </td>
-  </tr>
-</table>
+<h2 id="team">🤝 Colaboradores</h2>
+
+<div style="display: flex; justify-content: space-around; align-items: center; margin-top: 20px;">
+
+  <div style="text-align: center;">
+    <a href="https://github.com/rafaeljaber" target="_blank">
+      <img src="https://github.com/rafaeljaber.png" width="120px;" alt="Rafael Jáber Profile Picture" style="border-radius: 50%; border: 2px solid #ddd;"/>
+      <br>
+      <sub>
+        <b>Rafael Jáber</b>
+      </sub>
+    </a>
+    <p style="font-style: italic;">Programador</p>
+  </div>
+
+  <div style="text-align: center;">
+    <a href="https://github.com/angelicaweiler" target="_blank">
+      <img src="https://github.com/angelicaweiler.png" width="120px;" alt="Angélica Weiler Profile Picture" style="border-radius: 50%; border: 2px solid #ddd;"/>
+      <br>
+      <sub>
+        <b>Angélica Weiler</b>
+      </sub>
+    </a>
+    <p style="font-style: italic;">Instrutora</p>
+  </div>
+
+</div>
+
+<h2 id="thanks">🙏 Agradecimentos</h2>
+
+Gostaria de expressar minha sincera gratidão a todos que contribuíram para a realização deste projeto:
+
+- **Angélica Weiler**: Agradeço pelo suporte e orientação durante o desenvolvimento, além de fornecer insights valiosos que ajudaram a aprimorar o projeto.
+- **Equipe do Curso Javanautas**: Pela estruturação do curso e pelos materiais didáticos, que foram fundamentais para o aprendizado e aplicação das tecnologias utilizadas.
+- **Comunidade Open Source**: Pelo desenvolvimento e manutenção das ferramentas e frameworks que possibilitaram a construção deste projeto.
+- **Você, Leitor**: Agradeço por dedicar seu tempo para explorar este projeto. Espero que ele possa inspirar e auxiliar em seus próprios empreendimentos. Seu interesse e feedback são valiosos para mim.
+
+Sua contribuição e suporte foram essenciais para o sucesso deste projeto. Muito obrigado!
+
+
+Obrigado por acompanhar e apoiar este trabalho!
